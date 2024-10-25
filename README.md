@@ -3,7 +3,7 @@
 
 ## Overview
 
-This repository contains a relational database designed to preserve and analyze historical documents and financial records from the early modern period. It aims to facilitate research and provide accessible resources for scholars and enthusiasts in the field of history.
+This repository contains a relational database designed to preserve and analyze historical documents and financial records from the early modern period. It aims to facilitate research and provide accessible resources for scholars and enthusiasts in the field of history. The idea starts from my PhD project. 
 
 ## Features
 
@@ -16,13 +16,15 @@ This repository contains a relational database designed to preserve and analyze 
 
 - **Documentation**: Detailed documentation on the structure and relationships of the database schema is included to aid users in understanding and utilizing the data effectively.
 
-## Getting Started
-
 ### Prerequisites
 
 To work with this database, you will need:
 
 - PostgreSQL installed on your machine.
 - Basic knowledge of SQL and relational database concepts.
+
+----NDR
+I intend to upload every significant db alteration. This is clearly a work-in-progress type of thing, but I'll try to make something replicable. 
+  
 
 
