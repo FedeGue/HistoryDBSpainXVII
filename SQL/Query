@@ -1,0 +1,180 @@
+#first, we want to see what kind of documents we have, and how many of them we have
+
+SELECT * FROM documents;
+
+#at this moment (12/11/2024) we have 18 documents
+
+
+SELECT DISTINCT type from documents;
+
+/* 
+4 different types in the table
+type:
+"epistle"
+"consulta"
+"decree"
+"royal_order"
+*/
+
+#but we have more types, in general, in the doc_types tab:
+
+SELECT * FROM doc_types;
+
+"type"	"type_id"
+"consulta"	1
+"decree"	2
+"pragmatic"	3
+"epistle"	4
+"royal_order"	5
+
+#we can see that the 'pragmatic' type is still [null]:
+
+SELECT documents.type AS document, doc_types.type, doc_id FROM documents
+FULL JOIN doc_types
+ON documents.type = doc_types.type;
+
+/*
+"document"	"type"	"doc_id"
+"consulta"	"consulta"	14
+"consulta"	"consulta"	1
+"consulta"	"consulta"	2
+"consulta"	"consulta"	3
+"epistle"	"epistle"	4
+"consulta"	"consulta"	5
+"consulta"	"consulta"	6
+"consulta"	"consulta"	7
+"epistle"	"epistle"	8
+"consulta"	"consulta"	9
+"royal_order"	"royal_order"	10
+"consulta"	"consulta"	11
+"royal_order"	"royal_order"	12
+"consulta"	"consulta"	13
+"consulta"	"consulta"	15
+"consulta"	"consulta"	16
+"consulta"	"consulta"	17
+"decree"	"decree"	18
+[null]	"pragmatic"	[null]
+*/
+
+#more in detail:
+
+SELECT documents.type AS document, doc_types.type, doc_id FROM documents
+FULL JOIN doc_types
+ON documents.type = doc_types.type
+WHERE documents.type IS NULL;
+
+/* 
+"document"	"type"	"doc_id"
+	
+[null] "pragmatic"	[null]
+*/
+
+#NDR I alredy know that this is because the documentation I choose is mostly consultas. 
+	
+	
+/*I want to see what are the arguments discussed in the documentation. For this I created the tab "tag"
+and the tab "tag_documents" because I needed to link the documents with the tags in a 1:N relation*/
+
+SELECT COUNT(*) FROM tag
+
+#at this moment I have 72 different tags, that are -more or less esplicit- words used in the documents.
+
+SELECT DISTINCT tag_name FROM tag
+/*
+"tag_name"
+"redencion de juros"
+"Estado de Milan"
+"juros"
+"soccorros"
+"caxa de redempcion de Sicilia"
+"Parlamento de 1630"
+"vassallos"
+"Galeras Real y Patrona"
+"Millon de Alemania"
+"Hacienda Real"
+"dote de la Reina de Hungria"
+"crecimiento censos"
+"renta de la Cruzada de Sicilia"
+"request of mercedes"
+"espías"
+"arrendamientos"
+"tercios españoles"
+"royal debts"
+"hombres de negocios"
+"pensiones de por vida"
+"generic war"
+"meat"
+"wine"
+"Flandes"
+"retención tercios"
+"donativo"
+"gastos secretos"
+"medios y arbitrios"
+"Real Patrimonio"
+"Breda"
+"censos"
+"soldiers"
+"caxa de redempcion de Napoles"
+"crecimiento de juros"
+"adjutorio"
+"Caxa de Redempcion de Milan"
+"voluntad del reino"
+"galleys"
+"rentas reales "
+"baja de juros"
+"Liorna"
+"fleet"
+"vino de Milan"
+"juros de justicia"
+"gastos extraordinarios"
+"donativo de Baronaje"
+"Turco"
+"Polonia"
+"Reino de Nápoles"
+"cavalleria de Sicilia"
+"rentas de por vida"
+"juros de gracia"
+"Genova"
+"military conscription"
+"royal service"
+"silk"
+"Parlamento de 1624"
+"budget"
+"Alemania"
+"desempeño"
+"mercedes"
+"tratas"
+"licencia de armas"
+"Reino de Sicilia"
+"asientos"
+"conservacion de estados"
+"caxa militar"
+"donativo de eclesiasticos"
+"rescate de censos"
+"Cadiz"
+"rebeldes de Liorna"
+*/
+
+#but now I want to see how the tags and the documents link together .
+
+SELECT documents.doc_id, tag_documents.tag_id, tag.tag_name FROM documents
+INNER JOIN tag_documents
+ON documents.doc_id = tag_documents.doc_id
+INNER JOIN tag
+ON tag.tag_id = tag_documents.tag_id;
+
+#I,also, want to see what are the most frequent arguments:
+
+
+SELECT tag.tag_name, COUNT(*) AS occurrences
+FROM documents
+INNER JOIN tag_documents 
+ON documents.doc_id = tag_documents.doc_id
+INNER JOIN tag 
+ON tag.tag_id = tag_documents.tag_id
+GROUP BY tag.tag_name
+ORDER BY occurrences DESC;
+
+/* We can see that the most frequent references pertain to the Kingdom of Sicily. 
+This is expected, considering that the current documents were entered from the Sicilian Secretaría. 
+However, the second most frequent occurrence is "Flandes" (Flanders), which is due to the northern military campaigns. */
