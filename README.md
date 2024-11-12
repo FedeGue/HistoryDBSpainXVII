@@ -3,7 +3,11 @@
 
 ## Overview
 
-This repository contains a relational database designed to preserve and analyze historical documents and financial records from the early modern period. It aims to facilitate research and provide accessible resources for scholars and enthusiasts in the field of history. The idea starts from my PhD project. 
+This repository contains a relational database designed to preserve and analyze historical documents and financial records from the early modern period. It aims to facilitate research and provide accessible resources for scholars and enthusiasts in the field of history. The idea starts from my PhD project.
+The database contains documentation referring to the first half of the 17th century, with a main geographical focus on the Italian regions (Kingdom of Naples, Kingdom of Sicily, Duchy of Milan) under Spanish—or rather, Habsburg—control. This project aims to understand the influence of religion, theological discussions, and Catholic norms on public fiscal life. Therefore, the project relates to the Thirty Years' War, and in addition to archival documentation, I will examine theological and juridical literature.
+
+Spanish version: 
+La base de datos contiene documentación referente a la primera mitad del siglo XVII, con un enfoque geográfico principal en las regiones italianas (el Reino de Nápoles, el Reino de Sicilia, el Ducado de Milán) bajo el control español, o mejor dicho, de los Habsburgo. Este proyecto tiene como objetivo comprender la influencia de la religión, las discusiones teológicas y las normas católicas en la vida fiscal pública. Por lo tanto, el proyecto está relacionado con la Guerra de los Treinta Años, y además de la documentación archivística, examinaré la literatura teológica y jurídica.
 
 ## Features
 
