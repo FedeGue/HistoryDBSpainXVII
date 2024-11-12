@@ -1,8 +1,8 @@
-#first, we want to see what kind of documents we have, and how many of them we have
+-- first, we want to see what kind of documents we have, and how many of them we have
 
 SELECT * FROM documents;
 
-#at this moment (12/11/2024) we have 18 documents
+-- at this moment (12/11/2024) we have 18 documents
 
 
 SELECT DISTINCT type from documents;
@@ -16,7 +16,7 @@ type:
 "royal_order"
 */
 
-#but we have more types, in general, in the doc_types tab:
+-- but we have more types, in general, in the doc_types tab:
 
 SELECT * FROM doc_types;
 
@@ -27,7 +27,7 @@ SELECT * FROM doc_types;
 "epistle"	4
 "royal_order"	5
 
-#we can see that the 'pragmatic' type is still [null]:
+-- we can see that the 'pragmatic' type is still [null]:
 
 SELECT documents.type AS document, doc_types.type, doc_id FROM documents
 FULL JOIN doc_types
@@ -56,7 +56,7 @@ ON documents.type = doc_types.type;
 [null]	"pragmatic"	[null]
 */
 
-#more in detail:
+-- more in detail:
 
 SELECT documents.type AS document, doc_types.type, doc_id FROM documents
 FULL JOIN doc_types
@@ -155,7 +155,7 @@ SELECT DISTINCT tag_name FROM tag
 "rebeldes de Liorna"
 */
 
-#but now I want to see how the tags and the documents link together .
+-- but now I want to see how the tags and the documents link together .
 
 SELECT documents.doc_id, tag_documents.tag_id, tag.tag_name FROM documents
 INNER JOIN tag_documents
@@ -163,7 +163,7 @@ ON documents.doc_id = tag_documents.doc_id
 INNER JOIN tag
 ON tag.tag_id = tag_documents.tag_id;
 
-#I,also, want to see what are the most frequent arguments:
+-- I,also, want to see what are the most frequent arguments:
 
 
 SELECT tag.tag_name, COUNT(*) AS occurrences
