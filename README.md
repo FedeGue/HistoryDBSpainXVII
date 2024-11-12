@@ -9,7 +9,7 @@ The database contains documentation referring to the first half of the 17th cent
 Spanish version: 
 La base de datos contiene documentación referente a la primera mitad del siglo XVII, con un enfoque geográfico principal en las regiones italianas (el Reino de Nápoles, el Reino de Sicilia, el Ducado de Milán) bajo el control español, o mejor dicho, de los Habsburgo. Este proyecto tiene como objetivo comprender la influencia de la religión, las discusiones teológicas y las normas católicas en la vida fiscal pública. Por lo tanto, el proyecto está relacionado con la Guerra de los Treinta Años, y además de la documentación archivística, examinaré la literatura teológica y jurídica.
 
-## Features
+## Features --- Section under construction
 
 - **Structured Data**: The database is organized into multiple tables, each representing different aspects of historical documentation, including:
   - `documents`: Contains various types of documents (e.g., letters, consultas) categorized by genre.
