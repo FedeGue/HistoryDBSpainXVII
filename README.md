@@ -14,17 +14,20 @@ This repository contains a relational database designed to preserve and analyze 
 
 - **Data Relationships**: Tables are interconnected, allowing for complex queries and analysis of historical trends and relationships.
 
-- **Documentation**: Detailed documentation on the structure and relationships of the database schema is included to aid users in understanding and utilizing the data effectively.
-
 ### Prerequisites
 
 To work with this database, you will need:
 
 - PostgreSQL installed on your machine.
 - Basic knowledge of SQL and relational database concepts.
+- Intermediate or, better, advanced historical knowledge.
+
 
 ----NDR
-I intend to upload every significant db alteration. This is clearly a work-in-progress type of thing, but I'll try to make something replicable. 
+I intend to upload every significant db alteration. This is clearly a work-in-progress type of thing, but I'll try to make something replicable. In any case, if this kind of word tickles your imagination but you think you don't have the right historical knowledge, feel free to contact me! 
+
+
+
   
 
 
