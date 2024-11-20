@@ -1,0 +1,57 @@
+-- first it was:
+CREATE TABLE spanish_kings (
+startReign INT NOT NULL, -- this NOT NULL was a really bad, bad decision : INSERT INTO persons (name, surname, birth, death, noble_title)
+ endReign INT NOT NULL
+) INHERITS (persons);                                                                          VALUES (
+                                                                         'Fernando','de Aragón', 1452, 1516, 'King of Aragón (II), King of Castilla (V)')
+                                                                           ERRORE: viola vincolo NOT NULL. --I had to remove the constraint. 
+
+
+
+
+-- like the name sugests, I wanted to create a table in which insert the spanish kings, that (yes) are also people. So, thinking about the OOP I made a Mistake: I created the table like a daughter type of table.
+-- but the inheritance didn't worked like I wanted to. It gave me a bad headhache. First: redundance. Obv the daughter takes everything from the parent (at least le logical structure) , but I really just wanted something else
+-- in fact I only wanted to refer to the "persons" table with the person_id. 
+
+-- all the above didn't stop me to pursue my desire so I:
+
+CREATE OR REPLACE FUNCTION persons_insert_trigger()
+RETURNS TRIGGER AS $$  -- Indica che la funzione restituisce un tipo TRIGGER
+BEGIN
+    INSERT INTO spanish_kings (person_id, name, surname, birth, death, noble_title)
+    VALUES (NEW.person_id, NEW.name, NEW.surname, NEW.birth, NEW.death, NEW.noble_title);  -- Inserisce i dati nella tabella figlia
+--  RETURN NULL; I didn't wanted to write only in the daughter but also in the parent.
+    RETURN NEW;  -- Restituisce i dati per continuare l'inserimento nella tabella padre 
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insert_persons_tigger
+BEFORE INSERT ON persons
+FOR EACH ROW EXECUTE FUNCTION persons_insert_trigger();
+
+-- this made me nauseus
+-- I decided to delete some columns: error. I can't, it's a child-table!::
+
+alter table spanish_kings 
+drop column birth,
+drop column death;
+
+-- In this moment (some hours) I decided that the Inheritance thing wasn't my thing: now I wanted to drop the inheritance. 
+DROP FUNCTION persons_insert_trigger;
+DROP TRIGGER after_insert_persons ON persons;
+
+-- That didn't resolved my problems. I deleted the spanish_kings table and I decided to :
+
+CREATE TABLE kings (person_id INT NOT NULL, 
+title_kingdom TEXT NOT NULL, 
+kingdom TEXT NOT NULL, 
+startreign INT NOT NULL, 
+endreign INT NOT NULL);
+
+ALTER TABLE kings 
+ADD CONSTRAINT kings_fk
+FOREIGN KEY (person_id) REFERENCES persons(person_id);
+
+
+
+
